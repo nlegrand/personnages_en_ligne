@@ -1,0 +1,15 @@
+{
+    "class": "fighter",
+    "abilities": {
+	"STR": 15,
+	"INT": 10,
+	"WIS": 11,
+	"DEX": 13,
+	"CON": 13,
+	"CHA": 12
+    },
+    "XP": 0,
+    "HP": 4
+}
+
+
