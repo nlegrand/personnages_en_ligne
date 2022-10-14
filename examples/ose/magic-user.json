@@ -1,0 +1,13 @@
+{
+    "class": "magic-user",
+    "abilities": {
+	"STR": 10,
+	"INT": 16,
+	"WIS": 11,
+	"DEX": 7,
+	"CON": 12,
+	"CHA": 12
+    },
+    "XP": 12356,
+    "HP": 8
+}

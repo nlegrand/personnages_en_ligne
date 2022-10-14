@@ -1,16 +1,16 @@
-  # Copyright (c) 2022 Nicolas Legrand <nicolas.legrand@gmail.com>
+# Copyright (c) 2022 Nicolas Legrand <nicolas.legrand@gmail.com>
   
-  # Permission to use, copy, modify, and distribute this software for any
-  # purpose with or without fee is hereby granted, provided that the above
-  # copyright notice and this permission notice appear in all copies.
+# Permission to use, copy, modify, and distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
   
-  # THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-  # WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
-  # MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
-  # ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-  # WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
-  # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
-  # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS 
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS 
 
 import json
 
@@ -22,28 +22,28 @@ class Character:
         str = data['abilities']['STR']
         self.str = str
         if (str == 3):
-            melee = -3
+            meleemod = -3
             opendoors = "1-in-6"
         elif (str >= 4 and str <= 5):
-            melee = -2
+            meleemod = -2
             opendoors = "1-in-6"
         elif (str >= 6 and str <= 8):
-            melee = -1
+            meleemod = -1
             opendoors = "1-in-6"
         elif (str >= 9 and str <= 12): 
-            melee = 0
+            meleemod = 0
             opendoors = "2-in-6"
         elif (str >= 13 and str <= 15): 
-            melee = 1
+            meleemod = 1
             opendoors = "3-in-6"
         elif (str >= 16 and str <= 17): 
-            melee = 2
+            meleemod = 2
             opendoors = "4-in-6"
         elif (str == 18):
-            melee = 3
+            meleemod = 3
             opendoors = "5-in-6"
         self.opendoors = opendoors
-        self.melee = melee
+        self.meleemod = meleemod
 
         int = data['abilities']['INT']
         self.int = int
@@ -112,27 +112,27 @@ class Character:
         elif (dex == 18):
             bonus = 3
             initiative = 2
-        self.ac = bonus
-        self.missile = bonus
+        self.acmod = bonus
+        self.missilemod = bonus
         self.initiative = initiative
 
         con = data['abilities']['CON']
         self.con = con
-        if (int == 3):
-            hp = -3
-        elif (int >= 4 and int <= 5):
-            hp = -2
-        elif (int >= 6 and int <= 8):
-            hp = -1
-        elif (int >= 9 and int <= 12): 
-            hp = 0
-        elif (int >= 13 and int <= 15): 
-            hp = 1
-        elif (int >= 16 and int <= 17): 
-            hp = 2
-        elif (int == 18):
-            hp = 3
-        self.hp = hp
+        if (con == 3):
+            hpmod = -3
+        elif (con >= 4 and con <= 5):
+            hpmod = -2
+        elif (con >= 6 and con <= 8):
+            hpmod = -1
+        elif (con >= 9 and con <= 12): 
+            hpmod = 0
+        elif (con >= 13 and con <= 15): 
+            hpmod = 1
+        elif (con >= 16 and con <= 17): 
+            hpmod = 2
+        elif (con == 18):
+            hpmod = 3
+        self.hpmod = hpmod
 
         cha = data['abilities']['CHA']
         self.cha = cha
@@ -175,17 +175,18 @@ class Character:
                 mylevel = level
             else:
                 break
+        self.level = mylevel
         self.thac0 = classparams['level_progression'][mylevel]['THAC0']
         self.saving = {}
         saving = ['D','W','P','B','S']
         for s in saving:
             self.saving[s] = classparams['level_progression'][mylevel]['Saving'][s]
-
-    def attack_value_matrix(self):
+        if "Spells" in classparams['level_progression'][mylevel]:
+            self.spells = classparams['level_progression'][mylevel]['Spells']
         matrix = {}
         for i in range(-3, 10):
             tohit = self.thac0 + 1 * -i
             if tohit > 20:
                 tohit = 20
             matrix[i] = tohit
-        return matrix
+        self.attack_value_matrix = matrix
