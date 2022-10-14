@@ -18,16 +18,15 @@ production ready on day.
 
 Test
 ====
-    
-    >>> import json
-    >>> f = open("examples/fighter_character.json", "r", encoding="utf-8")
-    >>> caracs = json.load(f)
-    >>> import ose
-    >>> fighter = ose.Character(caracs)
-    >>> fighter.attack_value_matrix()
-    {-3: 20, -2: 20, -1: 20, 0: 19, 1: 18, 2: 17, 3: 16, 4: 15, 5: 14, 6: 13, 7: 12, 8: 11, 9: 10}
-    >>> fighter.opendoors
-    '3-in-6'
-    >>> dir(fighter)
-    ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'ac', 'attack_value_matrix', 'cha', 'con', 'dex', 'hp', 'initiative', 'int', 'languages', 'literacy', 'magicsave', 'maxretainers', 'melee', 'missile', 'npcreactions', 'opendoors', 'saving', 'str', 'thac0', 'wis', 'xp']
-    
+```import json
+f = open("examples/ose/fighter_character.json", "r", encoding="utf-8")
+caracs = json.load(f)
+import ose
+fighter = ose.Character(caracs)
+fighter.attack_value_matrix
+{-3: 20, -2: 20, -1: 20, 0: 19, 1: 18, 2: 17, 3: 16, 4: 15, 5: 14, 6: 13, 7: 12, 8: 11, 9: 10}
+fighter.opendoors
+'3-in-6'
+dir(fighter)
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'ac', 'attack_value_matrix', 'cha', 'con', 'dex', 'hp', 'initiative', 'int', 'languages', 'literacy', 'magicsave', 'maxretainers', 'melee', 'missile', 'npcreactions', 'opendoors', 'saving', 'str', 'thac0', 'wis', 'xp']
+```
